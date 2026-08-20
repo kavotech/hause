@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="520" height="130" viewBox="0 0 520 130" role="img" aria-labelledby="title">
+  <title id="title">Shadow Construction Services</title>
+  <rect width="520" height="130" fill="#111111"/>
+  <path d="M28 92 L66 30 L104 92 Z" fill="none" stroke="#c9963e" stroke-width="8" stroke-linejoin="round"/>
+  <path d="M45 92 V68 H87 V92" fill="none" stroke="#c9963e" stroke-width="7" stroke-linejoin="round"/>
+  <text x="128" y="59" font-family="Montserrat, Arial, sans-serif" font-size="34" font-weight="800" fill="#f2d28a">SHADOW</text>
+  <text x="130" y="91" font-family="Montserrat, Arial, sans-serif" font-size="17" font-weight="600" letter-spacing="2" fill="#ffffff">CONSTRUCTION SERVICES</text>
+</svg>
