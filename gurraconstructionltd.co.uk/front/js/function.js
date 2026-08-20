@@ -34,6 +34,45 @@
 		prependTo : '.responsive-menu'
 	});
 
+	/* Mobile drawer menu */
+	if (!$('.mobile-menu-overlay').length) {
+		$('body').append('<div class="mobile-menu-overlay" aria-hidden="true"></div>');
+	}
+
+	function closeMobileDrawer() {
+		var $button = $('.slicknav_btn');
+		if ($button.hasClass('slicknav_open')) {
+			$button.trigger('click');
+		}
+		$('body').removeClass('mobile-menu-open');
+	}
+
+	$(document).on('click', '.slicknav_btn', function() {
+		setTimeout(function() {
+			$('body').toggleClass('mobile-menu-open', $('.slicknav_btn').hasClass('slicknav_open'));
+		}, 10);
+	});
+
+	$(document).on('click', '.mobile-menu-overlay, .slicknav_nav a', function() {
+		closeMobileDrawer();
+	});
+
+	var currentPath = window.location.pathname.split('/').pop() || 'index.html';
+	$('.main-menu a, .slicknav_nav a').each(function() {
+		var linkPath = ($(this).attr('href') || '').split('/').pop();
+		if (linkPath === currentPath) {
+			$(this).addClass('active-menu-link');
+		}
+	});
+
+	if ($('#contactForm').length && typeof grecaptcha !== 'undefined') {
+		grecaptcha.ready(function() {
+			grecaptcha.execute($('#contactForm').data('recaptcha-site-key'), { action: 'contact' }).then(function(token) {
+				$('#recaptchaToken').val(token);
+			});
+		});
+	}
+
 	if($("a[href='#top']").length){
 		$("a[href='#top']").click(function() {
 			$("html, body").animate({ scrollTop: 0 }, "slow");

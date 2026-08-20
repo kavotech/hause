@@ -48,11 +48,7 @@
     </head>
 
 <body>
-    <div class="industry-contact-circlee contact-btn">
-    <a href="https://wa.me/447944468540" target="_blank">
-        <img src="front/images/whatsapp.png" alt="whatsapp">
-    </a>
-</div>
+    <div class="industry-contact-circlee recaptcha-v3-sign" aria-label="Protected by reCAPTCHA v3"><span>reCAPTCHA</span><small>v3 protected</small></div>
 <style>
     .contact-btn {
         position: fixed;
@@ -73,7 +69,7 @@
         <nav class="navbar navbar-expand-lg">
             <div class="container">
                 <a class="navbar-brand" href="index.html">
-                    <img style="width:170px" src="front/images/shadow-logo.svg" alt="Shadow Construction Services">
+                    <img class="site-logo-img" src="/logo.png" alt="Shadow Construction Services">
                 </a>
                 <div class="collapse navbar-collapse main-menu">
                     <div class="nav-menu-wrapper">
@@ -158,32 +154,73 @@
                         </div>
 
                         <div class="contact-form">
-                            <form id="contactForm" method="POST" action="#" data-original-action="https://gurraconstructionltd.co.uk/contactPost" data-integration-status="TODO: configure a Shadow Construction Services enquiry endpoint before enabling submissions" class="wow fadeInUp"
+                            <form id="contactForm" method="POST" action="#" data-original-action="https://gurraconstructionltd.co.uk/contactPost" data-integration-status="TODO: configure a Shadow Construction Services enquiry endpoint before enabling submissions" data-recaptcha-site-key="6LeL1I8tAAAAACMjKEMsQZwN6RiRAclaKhWdwuh_" class="wow fadeInUp"
                                 data-wow-delay="0.5s">
-                                <input type="hidden" name="_token" value="H701QyzFfeYGmMWJNmZ3QlIMMZ3wJPKDDF5xeH5F" autocomplete="off">                                <div class="row">
+                                <input type="hidden" name="_token" value="H701QyzFfeYGmMWJNmZ3QlIMMZ3wJPKDDF5xeH5F" autocomplete="off">
+                                <input type="hidden" name="recaptcha_token" id="recaptchaToken" value="">
+                                <!-- TODO: Verify recaptcha_token server-side with the private reCAPTCHA secret before enabling real submissions. -->
+                                <div class="row">
                                     <div class="form-group col-md-6 mb-4">
-                                        <input type="text" name="full_name" class="form-control" value="" placeholder="Full Name"></div><div class="form-group col-md-6 mb-4"><input type="text" name="postcode" class="form-control" value="" placeholder="Postcode">
-                                                                            </div>
+                                        <input type="text" name="full_name" class="form-control" value="" placeholder="Full Name">
+                                    </div>
                                     <div class="form-group col-md-6 mb-4">
-                                        <input type="email" name="email" class="form-control"
-                                            value="" placeholder="Email Address">
-                                                                            </div>
+                                        <input type="text" name="phone" class="form-control" value="" placeholder="Phone Number">
+                                    </div>
                                     <div class="form-group col-md-6 mb-4">
-                                        <input type="text" name="phone" class="form-control"
-                                            value="" placeholder="Phone Number">
-                                                                            </div>
-                                    <div class="form-group col-md-12 mb-5">
-                                        <input type="text" name="service_required" class="form-control" value="" placeholder="Service Required" style="margin-bottom:24px"><textarea name="project_details" class="form-control" rows="4" placeholder="Project Details"></textarea><select name="preferred_contact" class="form-control" style="margin-top:24px"><option value="">Preferred Contact Method</option><option>Phone</option><option>Email</option><option>WhatsApp</option></select>
-                                                                            </div>
+                                        <input type="email" name="email" class="form-control" value="" placeholder="Email Address">
+                                    </div>
+                                    <div class="form-group col-md-6 mb-4">
+                                        <input type="text" name="postcode" class="form-control" value="" placeholder="Postcode">
+                                    </div>
+                                    <div class="form-group col-md-6 mb-4">
+                                        <select name="service_required" class="form-control">
+                                            <option value="">Service Required</option>
+                                            <option>Painting &amp; Decorating</option>
+                                            <option>Plastering &amp; Skimming</option>
+                                            <option>Plumbing</option>
+                                            <option>Electrical Work</option>
+                                            <option>Kitchen Renovation / Fitting</option>
+                                            <option>Bathroom Renovation / Fitting</option>
+                                            <option>Extensions</option>
+                                            <option>Loft Conversion</option>
+                                            <option>Property Conversion</option>
+                                            <option>Restoration &amp; Refurbishment</option>
+                                            <option>Carpentry &amp; Joinery</option>
+                                            <option>Media Walls &amp; Wall Panelling</option>
+                                            <option>Brickwork / Repointing</option>
+                                            <option>Roofing</option>
+                                            <option>Fascias, Soffits &amp; Guttering</option>
+                                            <option>Fencing</option>
+                                            <option>Gardening &amp; Landscaping</option>
+                                            <option>Driveways / Jet Washing</option>
+                                            <option>Waste Removal</option>
+                                            <option>General Construction &amp; Home Improvements</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group col-md-6 mb-4">
+                                        <select name="project_timeline" class="form-control">
+                                            <option value="">Project Timeline</option>
+                                            <option>As soon as possible</option>
+                                            <option>Within 1 month</option>
+                                            <option>1-3 months</option>
+                                            <option>Planning ahead</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group col-md-6 mb-4">
+                                        <select name="preferred_contact" class="form-control">
+                                            <option value="">Preferred Contact Method</option>
+                                            <option>Phone</option>
+                                            <option>Email</option>
+                                            <option>WhatsApp</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group col-md-12 mb-4">
+                                        <textarea name="project_details" class="form-control" rows="5" placeholder="Project Details"></textarea>
+                                    </div>
                                     <div class="col-md-12" style="margin-top: 10px;">
-                                        <div style="display:flex;align-items: baseline;">
-                                            <p> 9+11=</p>
-                                            <div>
-                                                <input type="text" name="captcha"
-                                                    class="form-control"value="" placeholder="?"
-                                                    style="width: 100px; margin-right:10px">
-                                                                                            </div>
-                                            <button type="submit" class="btn-default">Submit Message</button>
+                                        <div class="contact-form-actions">
+                                            <button type="button" class="btn-default" title="TODO: configure enquiry endpoint and reCAPTCHA verification before enabling">Request a Free Quote</button>
+                                            <p class="recaptcha-note">Protected by reCAPTCHA v3. Form delivery will be enabled once the Shadow enquiry endpoint is configured.</p>
                                         </div>
                                         <div id="msgSubmit" class="h3 hidden"></div>
                                     </div>
@@ -200,11 +237,11 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="google-map-iframe">
-                        <iframe
-                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2482.266240936141!2d-0.09075612303452392!3d51.5266764092946!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x48761ca671bbca5f%3A0x137edcd9e2d92eb1!2s124%20City%20Rd%2C%20London%20EC1V%202NX%2C%20UK!5e0!3m2!1sen!2s!4v1732716450765!5m2!1sen!2s"
-                            allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
-                            style="border:0;" allowfullscreen="" loading="lazy"
-                            referrerpolicy="no-referrer-when-downgrade"></iframe>
+                        <div class="service-area-map-placeholder">
+                            <h3>London &amp; Essex</h3>
+                            <p>Shadow Construction Services covers construction, renovations and home improvements across London &amp; Essex.</p>
+                            <a href="tel:07944468540" class="btn-default">Call 07944 468540</a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -216,7 +253,7 @@
             <div class="col-lg-3 col-md-3 col-12">
                 <div class="about-footer">
                     <div class="footer-logo">
-                        <img src="front/images/shadow-logo-footer.svg" alt="Shadow Construction Services">
+                        <img class="site-logo-img" src="/logo.png" alt="Shadow Construction Services">
                     </div>
                     <p style="margin-top:15px; color:white">
                         We are dedicated to 100% client satisfaction and won’t rest until we ensure you are thrilled
@@ -277,6 +314,7 @@
     </div>
 </footer>
     <!-- Jquery Library File -->
+  <script src="https://www.google.com/recaptcha/api.js?render=6LeL1I8tAAAAACMjKEMsQZwN6RiRAclaKhWdwuh_"></script>
   <script data-cfasync="false" src="cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="front/js/jquery-3.7.1.min.js"></script>
   <!-- Bootstrap js file -->
   <script src="front/js/bootstrap.min.js"></script>
