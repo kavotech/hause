@@ -109,15 +109,17 @@
 
 	function refreshRecaptchaToken() {
 		var $contactForm = $('#contactForm');
-		var siteKey = $contactForm.data('recaptcha-site-key');
+		var siteKey = $contactForm.data('recaptcha-site-key') || '6LeL1I8tAAAAACMjKEMsQZwN6RiRAclaKhWdwuh_';
 
-		if (!$contactForm.length || !siteKey || typeof grecaptcha === 'undefined') {
+		if (!siteKey || typeof grecaptcha === 'undefined') {
 			return;
 		}
 
 		grecaptcha.ready(function() {
-			grecaptcha.execute(siteKey, { action: 'contact' }).then(function(token) {
-				$('#recaptchaToken').val(token);
+			grecaptcha.execute(siteKey, { action: $contactForm.length ? 'contact' : 'page_view' }).then(function(token) {
+				if ($('#recaptchaToken').length) {
+					$('#recaptchaToken').val(token);
+				}
 			});
 		});
 	}
