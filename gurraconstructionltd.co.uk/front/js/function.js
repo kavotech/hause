@@ -31,13 +31,18 @@
 	/* Slick Menu JS */
 	$('#menu').slicknav({
 		label : '',
-		prependTo : '.responsive-menu'
+		prependTo : '.responsive-menu',
+		closeOnClick : true,
+		duration : 300
 	});
 
 	/* Mobile drawer menu */
 	if (!$('.mobile-drawer-brand').length) {
 		$('.responsive-menu').prepend(
-			'<div class="mobile-drawer-brand"><a href="/"><img src="/logo.png" alt="Shadow Construction Services"></a></div>'
+			'<div class="mobile-drawer-brand">' +
+				'<a href="/"><img src="/logo.png" alt="Shadow Construction Services"></a>' +
+				'<button class="mobile-drawer-close" type="button" aria-label="Close menu">&times;</button>' +
+			'</div>'
 		);
 	}
 
@@ -45,25 +50,53 @@
 		$('body').append('<div class="mobile-menu-overlay" aria-hidden="true"></div>');
 	}
 
+	function setMobileDrawerState(isOpen) {
+		$('body').toggleClass('mobile-menu-open', isOpen);
+		$('.slicknav_btn').attr('aria-expanded', isOpen ? 'true' : 'false');
+		$('.mobile-menu-overlay').attr('aria-hidden', isOpen ? 'false' : 'true');
+	}
+
 	function closeMobileDrawer() {
 		var $button = $('.slicknav_btn');
 		if ($button.hasClass('slicknav_open')) {
 			$button.trigger('click');
+		} else {
+			setMobileDrawerState(false);
 		}
-		$('body').removeClass('mobile-menu-open');
 	}
 
 	$(document).on('click', '.slicknav_btn', function() {
-		setTimeout(function() {
-			$('body').toggleClass('mobile-menu-open', $('.slicknav_btn').hasClass('slicknav_open'));
-		}, 10);
+		setMobileDrawerState($(this).hasClass('slicknav_open'));
 	});
 
-	$(document).on('click', '.mobile-menu-overlay, .slicknav_nav a', function() {
+	$(document).on('click', '.mobile-menu-overlay, .mobile-drawer-close, .slicknav_nav a', function() {
 		closeMobileDrawer();
 	});
 
-	var currentPath = window.location.pathname.split('/').pop() || 'index.html';
+	$(document).on('keydown', function(event) {
+		if (event.key === 'Escape' && $('body').hasClass('mobile-menu-open')) {
+			closeMobileDrawer();
+			$('.slicknav_btn').trigger('focus');
+		}
+	});
+
+	$window.on('resize', function() {
+		if ($window.width() >= 992 && $('body').hasClass('mobile-menu-open')) {
+			closeMobileDrawer();
+		}
+	});
+
+	$('.slicknav_btn')
+		.attr('aria-label', 'Open navigation menu')
+		.attr('aria-expanded', 'false');
+
+	var currentUrlPath = window.location.pathname.toLowerCase();
+	var currentPath = currentUrlPath.split('/').pop() || 'index.html';
+	if (currentUrlPath.indexOf('/service/') !== -1) {
+		currentPath = 'our-services.html';
+	} else if (currentUrlPath.indexOf('/project/') !== -1) {
+		currentPath = 'projects.html';
+	}
 	$('.main-menu a, .slicknav_nav a').each(function() {
 		var linkPath = ($(this).attr('href') || '').split('/').pop();
 		if (linkPath === currentPath) {
@@ -71,13 +104,30 @@
 		}
 	});
 
-	if ($('#contactForm').length && typeof grecaptcha !== 'undefined') {
+	/* The official reCAPTCHA script supplies its own standard badge. */
+	$('.recaptcha-v3-sign').remove();
+
+	function refreshRecaptchaToken() {
+		var $contactForm = $('#contactForm');
+		var siteKey = $contactForm.data('recaptcha-site-key');
+
+		if (!$contactForm.length || !siteKey || typeof grecaptcha === 'undefined') {
+			return;
+		}
+
 		grecaptcha.ready(function() {
-			grecaptcha.execute($('#contactForm').data('recaptcha-site-key'), { action: 'contact' }).then(function(token) {
+			grecaptcha.execute(siteKey, { action: 'contact' }).then(function(token) {
 				$('#recaptchaToken').val(token);
 			});
 		});
 	}
+
+	refreshRecaptchaToken();
+	$('#contactForm').on('focusin', function() {
+		if (!$('#recaptchaToken').val()) {
+			refreshRecaptchaToken();
+		}
+	});
 
 	/* Cookie preferences */
 	var cookieChoice = localStorage.getItem('shadowCookieConsent');
