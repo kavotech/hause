@@ -58,13 +58,13 @@
 
 .navbar-brand img,
 .footer-logo img {
-    max-height: 72px;
+    max-height: 60px;
     object-fit: contain;
 }
 
 .site-logo-img {
-    width: 170px;
-    max-height: 78px;
+    width: 138px;
+    max-height: 62px;
     object-fit: contain;
 }
 
@@ -73,31 +73,76 @@
     right: 18px;
     bottom: 18px;
     z-index: 999;
-    width: auto;
-    min-width: 138px;
-    height: auto;
-    padding: 10px 14px;
-    border-radius: 4px;
-    background: #f9f9f9;
-    border: 1px solid rgba(0, 0, 0, 0.16);
-    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.18);
-    color: #333;
+    width: 74px;
+    height: 68px;
+    padding: 8px 6px 6px;
+    border-radius: 3px;
+    background: #fafafa;
+    border: 1px solid #d9d9d9;
+    box-shadow: 0 2px 7px rgba(0, 0, 0, 0.22);
+    color: #555;
     line-height: 1.2;
-    text-align: left;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.recaptcha-v3-sign::before {
+    content: "";
+    display: block;
+    width: 34px;
+    height: 34px;
+    margin-bottom: 4px;
+    background: conic-gradient(from 45deg, #4285f4 0 32%, transparent 32% 42%, #9aa0a6 42% 75%, transparent 75% 100%);
+    border-radius: 50%;
+    position: relative;
+    animation: recaptcha-soft-spin 9s linear infinite;
+}
+
+.recaptcha-v3-sign::after {
+    content: "";
+    position: absolute;
+    top: 17px;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-top: 10px solid #4285f4;
+    transform: translateX(4px) rotate(-35deg);
+}
+
+.recaptcha-v3-sign:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 16px rgba(0, 0, 0, 0.26);
 }
 
 .recaptcha-v3-sign span {
     display: block;
-    font-size: 13px;
-    font-weight: 700;
-    color: #333;
+    font-size: 10px;
+    font-weight: 500;
+    color: #555;
+    letter-spacing: 0;
 }
 
 .recaptcha-v3-sign small,
 .recaptcha-note {
     display: block;
-    font-size: 11px;
+    font-size: 8px;
     color: #666;
+}
+
+@keyframes recaptcha-soft-spin {
+    0%, 82% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
 }
 
 .contact-form-actions {
@@ -157,6 +202,156 @@ body.mobile-menu-open .mobile-menu-overlay {
 .main-menu a.active-menu-link,
 .slicknav_nav a.active-menu-link {
     color: var(--accent-color) !important;
+}
+
+.cookie-consent-panel {
+    position: fixed;
+    left: 32px;
+    bottom: 32px;
+    z-index: 1200;
+    width: min(92vw, 360px);
+    background: #070707;
+    color: var(--white-color);
+    padding: 30px 28px 28px;
+    box-shadow: 0 26px 70px rgba(0, 0, 0, 0.36);
+    border: 1px solid rgba(215, 166, 74, 0.24);
+    animation: cookie-panel-in 0.45s ease both;
+}
+
+.cookie-consent-panel.is-hiding {
+    animation: cookie-panel-out 0.28s ease both;
+}
+
+.cookie-close {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    width: 28px;
+    height: 28px;
+    border: 1px solid rgba(215, 166, 74, 0.5);
+    background: transparent;
+    color: var(--accent-color);
+    font-size: 22px;
+    line-height: 22px;
+    transition: background 0.3s ease, color 0.3s ease, transform 0.3s ease;
+}
+
+.cookie-close:hover,
+.cookie-close:focus {
+    background: var(--accent-color);
+    color: #080808;
+    transform: rotate(90deg);
+}
+
+.cookie-consent-panel h2 {
+    color: var(--white-color);
+    font-family: var(--accent-font);
+    font-size: 30px;
+    line-height: 1.05em;
+    margin-bottom: 16px;
+}
+
+.cookie-consent-panel h2 span {
+    color: var(--accent-color);
+    text-shadow: 3px 3px 0 rgba(255, 255, 255, 0.16);
+}
+
+.cookie-consent-panel p {
+    color: rgba(255, 255, 255, 0.78);
+    font-size: 14px;
+    line-height: 1.45em;
+    margin-bottom: 18px;
+}
+
+.cookie-options {
+    display: grid;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.cookie-option {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 11px;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    cursor: pointer;
+    transition: border-color 0.3s ease, background 0.3s ease, transform 0.3s ease;
+}
+
+.cookie-option:hover {
+    border-color: rgba(215, 166, 74, 0.65);
+    background: rgba(215, 166, 74, 0.08);
+    transform: translateX(4px);
+}
+
+.cookie-option input {
+    accent-color: var(--accent-color);
+    margin-top: 4px;
+}
+
+.cookie-option strong,
+.cookie-option small {
+    display: block;
+}
+
+.cookie-option strong {
+    color: var(--white-color);
+    font-size: 14px;
+}
+
+.cookie-option small {
+    color: rgba(255, 255, 255, 0.62);
+    font-size: 12px;
+    line-height: 1.35em;
+}
+
+.cookie-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.cookie-actions button {
+    min-height: 40px;
+    padding: 9px 16px;
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    font-size: 13px;
+    transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease, transform 0.3s ease;
+}
+
+.cookie-accept {
+    background: var(--accent-color);
+    color: #080808;
+}
+
+.cookie-save {
+    background: transparent;
+    color: var(--white-color);
+}
+
+.cookie-actions button:hover,
+.cookie-actions button:focus {
+    transform: translateY(-2px);
+    border-color: var(--accent-color);
+}
+
+@keyframes cookie-panel-in {
+    from {
+        opacity: 0;
+        transform: translateY(24px) scale(0.98);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+@keyframes cookie-panel-out {
+    to {
+        opacity: 0;
+        transform: translateY(18px) scale(0.98);
+    }
 }
 
 /************************************/
@@ -975,6 +1170,11 @@ header.main-header .header-sticky.active {
 }
 
 @media only screen and (max-width: 991px) {
+    .site-logo-img {
+        width: 118px;
+        max-height: 54px;
+    }
+
     .responsive-menu {
         position: fixed;
         top: 0;
@@ -987,17 +1187,32 @@ header.main-header .header-sticky.active {
         transition: transform 0.3s ease;
         box-shadow: 22px 0 50px rgba(0, 0, 0, 0.28);
         overflow-y: auto;
-        padding-top: 84px;
+        padding-top: 0;
     }
 
     body.mobile-menu-open .responsive-menu {
         transform: translateX(0);
     }
 
+    .mobile-drawer-brand {
+        display: flex;
+        align-items: center;
+        min-height: 88px;
+        padding: 20px 22px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+        background: linear-gradient(135deg, #090909 0%, #17120a 100%);
+    }
+
+    .mobile-drawer-brand img {
+        width: 128px;
+        max-height: 60px;
+        object-fit: contain;
+    }
+
     .slicknav_menu {
         position: static;
         background: transparent;
-        padding: 0 18px 24px;
+        padding: 16px 18px 24px;
     }
 
     .slicknav_btn {
@@ -1025,7 +1240,15 @@ header.main-header .header-sticky.active {
         color: var(--white-color);
         padding: 13px 4px;
         border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-        transition: color 0.3s ease, padding-left 0.3s ease;
+        opacity: 0;
+        transform: translateX(-14px);
+        transition: color 0.3s ease, padding-left 0.3s ease, opacity 0.3s ease, transform 0.3s ease;
+    }
+
+    body.mobile-menu-open .slicknav_nav .slicknav_row,
+    body.mobile-menu-open .slicknav_nav li a {
+        opacity: 1;
+        transform: translateX(0);
     }
 
     .slicknav_nav a:hover,
@@ -1042,6 +1265,22 @@ header.main-header .header-sticky.active {
     .slicknav_icon .slicknav_icon-bar {
         background-color: var(--primary-color);
     }
+
+    .cookie-consent-panel {
+        left: 16px;
+        right: 16px;
+        bottom: 16px;
+        width: auto;
+        padding: 26px 22px 22px;
+    }
+
+    .cookie-actions {
+        flex-wrap: wrap;
+    }
+
+    .cookie-actions button {
+        flex: 1 1 130px;
+    }
 }
 
 @media only screen and (min-width: 992px) {
@@ -1054,8 +1293,14 @@ header.main-header .header-sticky.active {
     .responsive-menu,
     .mobile-menu-overlay,
     .slicknav_nav .slicknav_row,
-    .slicknav_nav li a {
+    .slicknav_nav li a,
+    .cookie-consent-panel,
+    .cookie-close,
+    .cookie-option,
+    .cookie-actions button,
+    .recaptcha-v3-sign {
         transition-duration: 0.01ms !important;
+        animation-duration: 0.01ms !important;
     }
 }
 
