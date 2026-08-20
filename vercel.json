@@ -1,32 +1,6 @@
 {
-  "rewrites": [
-    {
-      "source": "/front/:path*",
-      "destination": "/gurraconstructionltd.co.uk/front/:path*"
-    },
-    {
-      "source": "/storage/:path*",
-      "destination": "/gurraconstructionltd.co.uk/storage/:path*"
-    },
-    {
-      "source": "/service/:path*",
-      "destination": "/gurraconstructionltd.co.uk/service/:path*"
-    },
-    {
-      "source": "/project/:path*",
-      "destination": "/gurraconstructionltd.co.uk/project/:path*"
-    },
-    {
-      "source": "/cdn-cgi/:path*",
-      "destination": "/gurraconstructionltd.co.uk/cdn-cgi/:path*"
-    },
-    {
-      "source": "/:path*.html",
-      "destination": "/gurraconstructionltd.co.uk/:path*.html"
-    },
-    {
-      "source": "/",
-      "destination": "/gurraconstructionltd.co.uk/index.html"
-    }
-  ]
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist",
+  "cleanUrls": false,
+  "trailingSlash": false
 }
