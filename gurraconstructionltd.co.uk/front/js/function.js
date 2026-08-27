@@ -8,6 +8,20 @@
 	$window.on('load', function(){
 		$(".preloader").fadeOut(600);
 	});
+
+	/* Recalculate scroll-triggered animation positions once images and
+	   webfonts have finished loading, since layout can shift after the
+	   initial ScrollTrigger measurement and leave text stuck invisible. */
+	if (typeof ScrollTrigger !== 'undefined') {
+		$window.on('load', function() {
+			ScrollTrigger.refresh();
+		});
+		if (document.fonts && document.fonts.ready) {
+			document.fonts.ready.then(function() {
+				ScrollTrigger.refresh();
+			});
+		}
+	}
 	
 	/* Sticky Header */	
 	if($('.active-sticky-header').length){
@@ -40,7 +54,7 @@
 	if (!$('.mobile-drawer-brand').length) {
 		$('.responsive-menu').prepend(
 			'<div class="mobile-drawer-brand">' +
-				'<a href="/"><img src="/logo.png" alt="Shadow Construction Services"></a>' +
+				'<a href="/"><img src="/logo.png" alt="Hausworks"></a>' +
 				'<button class="mobile-drawer-close" type="button" aria-label="Close menu">&times;</button>' +
 			'</div>'
 		);
@@ -109,7 +123,7 @@
 
 	function refreshRecaptchaToken() {
 		var $contactForm = $('#contactForm');
-		var siteKey = $contactForm.data('recaptcha-site-key') || '6LeL1I8tAAAAACMjKEMsQZwN6RiRAclaKhWdwuh_';
+		var siteKey = $contactForm.data('recaptcha-site-key') || '6LfGe5ktAAAAAA7zTcVjwBjLtSTsicFOjgIvsFua';
 
 		if (!siteKey || typeof grecaptcha === 'undefined') {
 			return;
@@ -132,8 +146,8 @@
 	});
 
 	/* Cookie preferences */
-	var cookieChoice = localStorage.getItem('shadowCookieConsent');
-	var cookiePrefs = localStorage.getItem('shadowCookiePreferences');
+	var cookieChoice = localStorage.getItem('hausworksCookieConsent');
+	var cookiePrefs = localStorage.getItem('hausworksCookiePreferences');
 
 	if (!cookieChoice && !$('.cookie-consent-panel').length) {
 		$('body').append(
@@ -163,8 +177,8 @@
 			marketing: acceptAll || $('.cookie-option input[name="marketing"]').is(':checked')
 		};
 
-		localStorage.setItem('shadowCookieConsent', 'saved');
-		localStorage.setItem('shadowCookiePreferences', JSON.stringify(preferences));
+		localStorage.setItem('hausworksCookieConsent', 'saved');
+		localStorage.setItem('hausworksCookiePreferences', JSON.stringify(preferences));
 		$('.cookie-consent-panel').addClass('is-hiding');
 		setTimeout(function() {
 			$('.cookie-consent-panel').remove();
@@ -364,18 +378,20 @@
 
 			gsap.set(element.split.chars, {
 				opacity: 0,
-				x: "50",
+				y: "60",
+				x: "0",
+				rotateX: "-90",
 			});
 
 			element.animation = gsap.to(element.split.chars, {
-				scrollTrigger: { trigger: element,	start: "top 90%" },
+				scrollTrigger: { trigger: element,	start: "top 95%" },
 				x: "0",
 				y: "0",
 				rotateX: "0",
 				opacity: 1,
-				duration: 1,
-				ease: Back.easeOut,
-				stagger: 0.02,
+				duration: 1.1,
+				ease: Back.easeOut.config(1.6),
+				stagger: 0.025,
 			});
 		});		
 	}
