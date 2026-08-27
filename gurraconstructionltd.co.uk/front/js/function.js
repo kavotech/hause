@@ -145,6 +145,33 @@
 		}
 	});
 
+	/* Contact form: no backend is configured yet, so hand the enquiry off
+	   to the visitor's email client instead of silently doing nothing. */
+	$('#contactForm').on('submit', function(event) {
+		event.preventDefault();
+		var $form = $(this);
+		var service = $form.find('input[name="service_required"]:checked').val() || 'Not specified';
+		var fields = [
+			['Service', service],
+			['Name', $form.find('[name="full_name"]').val()],
+			['Phone', $form.find('[name="phone"]').val()],
+			['Email', $form.find('[name="email"]').val()],
+			['Postcode', $form.find('[name="postcode"]').val()],
+			['Project timeline', $form.find('[name="project_timeline"]').val()],
+			['Preferred contact method', $form.find('[name="preferred_contact"]').val()],
+		];
+		var body = fields
+			.filter(function(pair) { return pair[1]; })
+			.map(function(pair) { return pair[0] + ': ' + pair[1]; })
+			.join('\n');
+		var details = $form.find('[name="project_details"]').val();
+		if (details) {
+			body += '\n\nJob details:\n' + details;
+		}
+		var subject = 'Quote request: ' + service;
+		window.location.href = 'mailto:info@hausworks.uk?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+	});
+
 	/* Cookie preferences */
 	var cookieChoice = localStorage.getItem('hausworksCookieConsent');
 	var cookiePrefs = localStorage.getItem('hausworksCookiePreferences');
