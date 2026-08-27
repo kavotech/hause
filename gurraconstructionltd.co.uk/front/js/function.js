@@ -360,11 +360,17 @@
 		});		
 	}
 	
-	if ($('.text-anime-style-3').length) {		
-		let	animatedTextElements = document.querySelectorAll('.text-anime-style-3');
-		
-		 animatedTextElements.forEach((element) => {
-			//Reset if needed
+	function initTextAnimeStyle3() {
+		if (!$('.text-anime-style-3').length) {
+			return;
+		}
+		let animatedTextElements = document.querySelectorAll('.text-anime-style-3');
+
+		animatedTextElements.forEach((element) => {
+			// Reset if needed (also re-run on resize so lines re-wrap for the
+			// current viewport instead of keeping stale line breaks from the
+			// width the text was originally split at — a common cause of
+			// broken-looking headings after a mobile orientation change).
 			if (element.animation) {
 				element.animation.progress(1).kill();
 				element.split.revert();
@@ -393,8 +399,16 @@
 				ease: Back.easeOut.config(1.6),
 				stagger: 0.025,
 			});
-		});		
+		});
 	}
+
+	initTextAnimeStyle3();
+
+	var textAnimeResizeTimer;
+	$window.on('resize', function() {
+		clearTimeout(textAnimeResizeTimer);
+		textAnimeResizeTimer = setTimeout(initTextAnimeStyle3, 250);
+	});
 
 	/* Parallaxie js */
 	var $parallaxie = $('.parallaxie');
