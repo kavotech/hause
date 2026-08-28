@@ -401,6 +401,24 @@ h6 {
     color: var(--primary-color);
 }
 
+/* The default heading color above (--primary-color, near-black) is meant
+   for headings sitting on a light/white card (e.g. .mission-vission-item,
+   .industry-archivement-item) — leave those alone. Everywhere else now
+   sits on the site's dark background, so those headings need to be light
+   or they're unreadable. */
+.section-title h1,
+.section-title h2,
+.case-study-content h3,
+.why-choose-item h3,
+.expertise-header h3,
+.contact-sidebar-card h3,
+.reviews-placeholder h2,
+.service-single-content h3,
+.privacy-policy h2,
+.privacy-policy h3 {
+    color: var(--white-color);
+}
+
 figure {
     margin: 0;
 }
