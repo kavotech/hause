@@ -9,16 +9,16 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <link rel="icon" type="image/png" href="/front/images/favicon.png">
     <link rel="apple-touch-icon" href="/front/images/favicon.png">
-    <link rel="canonical" href="https://hausworks.co.uk/contact-us.html">
+    <link rel="canonical" href="https://hausworks.uk/contact-us.html">
     <title>Contact Us | Hausworks London</title>
 <meta name="keywords" content="carpentry London, handyman London, gardening services London, garden maintenance London, painting and decorating London, house removals London, office removals London, property maintenance London, local handyman London, garden tidy ups London" />
 <meta name="rights" content="Copyright 2026 Hausworks. All rights reserved." />
 <meta name="description" content="Get a free quote from Hausworks. Call, email or fill out our form for carpentry, handyman, gardening, painting or removals across London." />
-<meta property="og:url" content="https://hausworks.co.uk/contact-us.html" />
+<meta property="og:url" content="https://hausworks.uk/contact-us.html" />
 <meta property="og:type" content="article" />
 <meta property="og:title" content="Contact Us" />
 <meta property="og:description" content="Get a free quote from Hausworks. Call, email or fill out our form for carpentry, handyman, gardening, painting or removals across London." />
-<meta property="og:image" content="https://hausworks.co.uk/front/images/hausworks-social.png" />
+<meta property="og:image" content="https://hausworks.uk/front/images/hausworks-social.png" />
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 
@@ -123,8 +123,9 @@
                                 data-wow-delay="0.5s">
                                 <input type="hidden" name="_token" value="H701QyzFfeYGmMWJNmZ3QlIMMZ3wJPKDDF5xeH5F" autocomplete="off">
                                 <input type="hidden" name="recaptcha_token" id="recaptchaToken" value="">
-                                <div class="form-group mb-2">
-                                    <span class="contact-form-label">Which service do you need?</span>
+
+                                <div class="form-section">
+                                    <h3 class="form-section-title">What Service Do You Need?</h3>
                                     <div class="service-tile-group">
                                         <label class="service-tile">
                                             <input type="radio" name="service_required" value="Carpentry" class="service-tile-input" checked>
@@ -163,47 +164,69 @@
                                         </label>
                                     </div>
                                 </div>
-                                <div class="row">
-                                    <div class="form-group col-md-6 mb-4">
-                                        <input type="text" name="full_name" class="form-control" value="" placeholder="Full Name" required>
-                                    </div>
-                                    <div class="form-group col-md-6 mb-4">
-                                        <input type="tel" name="phone" class="form-control" value="" placeholder="Phone Number" required>
-                                    </div>
-                                    <div class="form-group col-md-6 mb-4">
-                                        <input type="email" name="email" class="form-control" value="" placeholder="Email Address" required>
-                                    </div>
-                                    <div class="form-group col-md-6 mb-4">
-                                        <input type="text" name="postcode" class="form-control" value="" placeholder="Postcode">
-                                    </div>
-                                    <div class="form-group col-md-6 mb-4">
-                                        <select name="project_timeline" class="form-control">
-                                            <option value="">Project Timeline</option>
-                                            <option>As soon as possible</option>
-                                            <option>Within 1 month</option>
-                                            <option>1-3 months</option>
-                                            <option>Planning ahead</option>
-                                        </select>
-                                    </div>
-                                    <div class="form-group col-md-6 mb-4">
-                                        <select name="preferred_contact" class="form-control">
-                                            <option value="">Preferred Contact Method</option>
-                                            <option>Phone</option>
-                                            <option>Email</option>
-                                            <option>WhatsApp</option>
-                                        </select>
-                                    </div>
-                                    <div class="form-group col-md-12 mb-4">
-                                        <textarea name="project_details" class="form-control" rows="5" placeholder="Tell us about the job"></textarea>
-                                    </div>
-                                    <div class="col-md-12" style="margin-top: 10px;">
-                                        <div class="contact-form-actions">
-                                            <button type="submit" class="btn-default">Get Your Quote</button>
-                                            <p class="recaptcha-note">Protected by reCAPTCHA v3. We usually reply within 24 hours.</p>
+
+                                <hr class="form-divider">
+
+                                <div class="form-section">
+                                    <h3 class="form-section-title">Your Details</h3>
+                                    <div class="row">
+                                        <div class="form-group col-md-6 mb-4">
+                                            <input type="text" name="full_name" class="form-control" value="" placeholder="Full Name" required>
                                         </div>
-                                        <div id="msgSubmit" class="h3 hidden"></div>
+                                        <div class="form-group col-md-6 mb-4">
+                                            <input type="tel" name="phone" class="form-control" value="" placeholder="Phone Number" required>
+                                        </div>
+                                        <div class="form-group col-md-6 mb-4">
+                                            <input type="email" name="email" class="form-control" value="" placeholder="Email Address" required>
+                                        </div>
+                                        <div class="form-group col-md-6 mb-4">
+                                            <input type="text" name="postcode" class="form-control" value="" placeholder="Postcode">
+                                        </div>
                                     </div>
                                 </div>
+
+                                <hr class="form-divider">
+
+                                <div class="form-section">
+                                    <h3 class="form-section-title">Job Details</h3>
+                                    <div class="row">
+                                        <div class="form-group col-md-6 mb-4">
+                                            <select name="project_timeline" class="form-control">
+                                                <option value="">Project Timeline</option>
+                                                <option>As soon as possible</option>
+                                                <option>Within 1 month</option>
+                                                <option>1-3 months</option>
+                                                <option>Planning ahead</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group col-md-6 mb-4">
+                                            <select name="preferred_contact" class="form-control">
+                                                <option value="">Preferred Contact Method</option>
+                                                <option>Phone</option>
+                                                <option>Email</option>
+                                                <option>WhatsApp</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group col-md-12 mb-1">
+                                            <textarea name="project_details" class="form-control" rows="5" placeholder="Tell us about the job"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <hr class="form-divider">
+
+                                <div class="form-consent">
+                                    <label>
+                                        <input type="checkbox" name="consent" required>
+                                        <span>By submitting this form you agree to be contacted by Hausworks about your enquiry. We'll never share your details with anyone else.</span>
+                                    </label>
+                                </div>
+
+                                <div class="contact-form-actions">
+                                    <button type="submit" class="btn-default btn-pill">Get Your Quote <i class="fa-solid fa-arrow-right"></i></button>
+                                    <p class="recaptcha-note">Protected by reCAPTCHA v3. We usually reply within 24 hours.</p>
+                                </div>
+                                <div id="msgSubmit" class="h3 hidden"></div>
                             </form>
                         </div>
                     </div>

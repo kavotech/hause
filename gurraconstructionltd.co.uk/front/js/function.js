@@ -22,7 +22,22 @@
 			});
 		}
 	}
-	
+
+	/* Safety net: WOW.js hides ".wow" elements (inline visibility:hidden)
+	   until it judges them on-screen, and the GSAP heading animation starts
+	   every character at opacity 0 until ScrollTrigger fires. Both rely on
+	   layout being stable at the moment they run; if a slow image/font load
+	   throws that measurement off, the element can stay hidden indefinitely.
+	   Force everything visible after a few seconds no matter what. */
+	setTimeout(function() {
+		$('.wow[style*="hidden"]').css('visibility', 'visible');
+		document.querySelectorAll('.text-anime-style-3').forEach(function(element) {
+			if (element.split && element.split.chars && element.split.chars.length) {
+				gsap.set(element.split.chars, { opacity: 1, x: 0, y: 0, rotateX: 0 });
+			}
+		});
+	}, 2500);
+
 	/* Sticky Header */	
 	if($('.active-sticky-header').length){
 		$window.on('resize', function(){
@@ -56,6 +71,16 @@
 			'<div class="mobile-drawer-brand">' +
 				'<a href="/"><img src="/logo.png" alt="Hausworks"></a>' +
 				'<button class="mobile-drawer-close" type="button" aria-label="Close menu">&times;</button>' +
+			'</div>'
+		);
+	}
+
+	if (!$('.mobile-drawer-cta').length) {
+		/* SlickNav only clones the nav <ul>, so the header's "Get a Free
+		   Quote" button never made it into the mobile drawer. Add it back. */
+		$('.responsive-menu').append(
+			'<div class="mobile-drawer-cta">' +
+				'<a href="contact-us.html" class="btn-default no-icon">Get a Free Quote</a>' +
 			'</div>'
 		);
 	}
@@ -145,31 +170,67 @@
 		}
 	});
 
-	/* Contact form: no backend is configured yet, so hand the enquiry off
-	   to the visitor's email client instead of silently doing nothing. */
+	/* Contact form: submit to the /api/contact serverless function, which
+	   emails Hausworks and sends the customer a confirmation via Resend.
+	   Falls back to a mailto link if the request itself fails (e.g. the
+	   function isn't deployed yet, or the visitor is offline). */
 	$('#contactForm').on('submit', function(event) {
 		event.preventDefault();
 		var $form = $(this);
-		var service = $form.find('input[name="service_required"]:checked').val() || 'Not specified';
-		var fields = [
-			['Service', service],
-			['Name', $form.find('[name="full_name"]').val()],
-			['Phone', $form.find('[name="phone"]').val()],
-			['Email', $form.find('[name="email"]').val()],
-			['Postcode', $form.find('[name="postcode"]').val()],
-			['Project timeline', $form.find('[name="project_timeline"]').val()],
-			['Preferred contact method', $form.find('[name="preferred_contact"]').val()],
-		];
-		var body = fields
-			.filter(function(pair) { return pair[1]; })
-			.map(function(pair) { return pair[0] + ': ' + pair[1]; })
-			.join('\n');
-		var details = $form.find('[name="project_details"]').val();
-		if (details) {
-			body += '\n\nJob details:\n' + details;
+		var $button = $form.find('button[type="submit"]');
+		var $msg = $('#msgSubmit');
+		var data = {
+			service_required: $form.find('input[name="service_required"]:checked').val() || 'Not specified',
+			full_name: $form.find('[name="full_name"]').val(),
+			phone: $form.find('[name="phone"]').val(),
+			email: $form.find('[name="email"]').val(),
+			postcode: $form.find('[name="postcode"]').val(),
+			project_timeline: $form.find('[name="project_timeline"]').val(),
+			preferred_contact: $form.find('[name="preferred_contact"]').val(),
+			project_details: $form.find('[name="project_details"]').val(),
+		};
+
+		function mailtoFallback() {
+			var subject = 'Quote request: ' + data.service_required;
+			var body = Object.keys(data)
+				.filter(function(key) { return data[key] && key !== 'project_details'; })
+				.map(function(key) { return key + ': ' + data[key]; })
+				.join('\n');
+			if (data.project_details) {
+				body += '\n\nJob details:\n' + data.project_details;
+			}
+			window.location.href = 'mailto:info@hausworks.uk?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
 		}
-		var subject = 'Quote request: ' + service;
-		window.location.href = 'mailto:info@hausworks.uk?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+
+		$button.prop('disabled', true);
+		$msg.removeClass('hidden').text('Sending...');
+
+		fetch('/api/contact', {
+			method: 'POST',
+			headers: { 'Content-Type': 'application/json' },
+			body: JSON.stringify(data),
+		})
+			.then(function(response) {
+				return response.json().then(function(json) {
+					return { ok: response.ok, json: json };
+				});
+			})
+			.then(function(result) {
+				if (result.ok) {
+					$msg.text("Thanks — we've received your enquiry and will be in touch within 24 hours.");
+					$form[0].reset();
+				} else {
+					$msg.text((result.json && result.json.error) || 'Something went wrong. Opening your email client instead...');
+					setTimeout(mailtoFallback, 1200);
+				}
+			})
+			.catch(function() {
+				$msg.text('Could not reach our server. Opening your email client instead...');
+				setTimeout(mailtoFallback, 1200);
+			})
+			.finally(function() {
+				$button.prop('disabled', false);
+			});
 	});
 
 	/* Cookie preferences */

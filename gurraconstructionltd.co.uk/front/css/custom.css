@@ -1178,6 +1178,15 @@ header.main-header .header-sticky.active {
         padding: 16px 18px 24px;
     }
 
+    .mobile-drawer-cta {
+        padding: 0 18px 24px;
+    }
+
+    .mobile-drawer-cta .btn-default {
+        display: block;
+        text-align: center;
+    }
+
     .slicknav_btn {
         position: fixed;
         top: 20px;
@@ -2505,7 +2514,7 @@ header.main-header .header-sticky.active {
 
 .main-footer .scrolling-content span {
     color: var(--white-color);
-    opacity: 6%;
+    opacity: 14%;
 }
 
 .footer-links h3 {
@@ -4651,6 +4660,78 @@ header.main-header .header-sticky.active {
     font-weight: 600;
     font-size: 15px;
     margin-bottom: 14px;
+}
+
+.form-section {
+    margin-bottom: 5px;
+}
+
+.form-section-title {
+    color: var(--white-color);
+    font-size: 16px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    margin-bottom: 20px;
+}
+
+.form-divider {
+    border: none;
+    border-top: 1px solid var(--dark-divider-color);
+    margin: 30px 0;
+}
+
+.form-consent {
+    margin-bottom: 30px;
+}
+
+.form-consent label {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    cursor: pointer;
+    margin: 0;
+}
+
+.form-consent input[type="checkbox"] {
+    flex-shrink: 0;
+    width: 18px;
+    height: 18px;
+    margin-top: 3px;
+    accent-color: var(--accent-color);
+}
+
+.form-consent span {
+    color: var(--text-color);
+    font-size: 14px;
+    line-height: 1.5em;
+}
+
+.contact-form-actions {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+#msgSubmit {
+    font-size: 14px;
+    color: var(--white-color);
+    margin-top: 16px;
+}
+
+#msgSubmit.hidden {
+    display: none;
+}
+
+.contact-us-form .btn-pill {
+    border-radius: 50px;
+    width: auto;
+    padding: 16px 34px;
+}
+
+.btn-pill i {
+    margin-left: 8px;
 }
 
 .service-tile-group {
