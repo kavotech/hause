@@ -55,4 +55,39 @@ for (const file of walkFiles(distDir)) {
   }
 }
 
+const expiredNoticeHtml = `<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Hosting Preview Expired</title>
+<style>
+  html, body {
+    margin: 0;
+    height: 100%;
+    background: #000;
+    color: #fff;
+  }
+  body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-family: sans-serif;
+    font-size: 1.5rem;
+    padding: 1rem;
+  }
+</style>
+</head>
+<body>
+  <p>THIS SITE HOSTING PREVIEW HAS EXPIRED</p>
+</body>
+</html>
+`;
+
+for (const file of walkFiles(distDir)) {
+  if (path.extname(file).toLowerCase() === '.html') {
+    fs.writeFileSync(file, expiredNoticeHtml);
+  }
+}
+
 console.log(`Static site built in ${path.relative(root, distDir)}`);
